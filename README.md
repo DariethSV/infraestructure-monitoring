@@ -281,8 +281,174 @@ Verifica que el archivo llegó a S3:
 aws s3 ls s3://infrastucture-vbenitezz-dfsanchezv/raw/prometheus/ --recursive
 # El archivo debe tener ~117KB. Si pesa ~390 bytes, Prometheus aún no tiene datos — espera 2 minutos y reintenta.
 ```
-
+Los datos enviados por prometheus y recuperdaso con Lambda se muestran en el siguiente formato:
+`
+{
+  "collected_at": "2026-06-01T18:58:06.195683+00:00",
+  "metrics": {
+    "node_cpu_seconds_total": [
+      {
+        "metric": {
+          "__name__": "node_cpu_seconds_total",
+          "container": "node-exporter",
+          "cpu": "0",
+          "endpoint": "http-metrics",
+          "instance": "172.16.2.172:9100",
+          "job": "node-exporter",
+          "mode": "idle",
+          "namespace": "monitoring",
+          "pod": "monitoring-prometheus-node-exporter-cggcl",
+          "service": "monitoring-prometheus-node-exporter"
+        },
+        "value": [1780340286.329, "65353.31"]
+      },
+      {
+        "metric": {
+          "__name__": "node_cpu_seconds_total",
+          "container": "node-exporter",
+          "cpu": "0",
+          "endpoint": "http-metrics",
+          "instance": "172.16.2.172:9100",
+          "job": "node-exporter",
+          "mode": "user",
+          "namespace": "monitoring",
+          "pod": "monitoring-prometheus-node-exporter-cggcl",
+          "service": "monitoring-prometheus-node-exporter"
+        },
+        "value": [1780340286.329, "1523.06"]
+      },
+      {
+        "metric": {
+          "__name__": "node_cpu_seconds_total",
+          "container": "node-exporter",
+          "cpu": "1",
+          "endpoint": "http-metrics",
+          "instance": "172.16.2.220:9100",
+          "job": "node-exporter",
+          "mode": "idle",
+          "namespace": "monitoring",
+          "pod": "monitoring-prometheus-node-exporter-qxpgn",
+          "service": "monitoring-prometheus-node-exporter"
+        },
+        "value": [1780340286.329, "71616.45"]
+      }
+    ],
+    "node_memory_MemAvailable_bytes": [
+      {
+        "metric": {
+          "__name__": "node_memory_MemAvailable_bytes",
+          "container": "node-exporter",
+          "endpoint": "http-metrics",
+          "instance": "172.16.2.172:9100",
+          "job": "node-exporter",
+          "namespace": "monitoring",
+          "pod": "monitoring-prometheus-node-exporter-cggcl",
+          "service": "monitoring-prometheus-node-exporter"
+        },
+        "value": [1780340286.345, "2427465728"]
+      },
+      {
+        "metric": {
+          "__name__": "node_memory_MemAvailable_bytes",
+          "container": "node-exporter",
+          "endpoint": "http-metrics",
+          "instance": "172.16.2.220:9100",
+          "job": "node-exporter",
+          "namespace": "monitoring",
+          "pod": "monitoring-prometheus-node-exporter-qxpgn",
+          "service": "monitoring-prometheus-node-exporter"
+        },
+        "value": [1780340286.345, "3389153280"]
+      }
+    ],
+    "kube_pod_status_phase": [
+      {
+        "metric": {
+          "__name__": "kube_pod_status_phase",
+          "container": "kube-state-metrics",
+          "endpoint": "http",
+          "instance": "172.16.2.82:8080",
+          "job": "kube-state-metrics",
+          "namespace": "monitoring",
+          "phase": "Running",
+          "pod": "monitoring-grafana-849544f6c9-w87zw",
+          "service": "monitoring-kube-state-metrics",
+          "uid": "83789bd6-55ce-4d65-8688-49c4f71b7ad4"
+        },
+        "value": [1780340286.424, "1"]
+      },
+      {
+        "metric": {
+          "__name__": "kube_pod_status_phase",
+          "container": "kube-state-metrics",
+          "endpoint": "http",
+          "instance": "172.16.2.82:8080",
+          "job": "kube-state-metrics",
+          "namespace": "monitoring",
+          "phase": "Running",
+          "pod": "prometheus-monitoring-kube-prometheus-prometheus-0",
+          "service": "monitoring-kube-state-metrics",
+          "uid": "444477f8-a106-410b-a104-b364f53604c9"
+        },
+        "value": [1780340286.424, "1"]
+      },
+      {
+        "metric": {
+          "__name__": "kube_pod_status_phase",
+          "container": "kube-state-metrics",
+          "endpoint": "http",
+          "instance": "172.16.2.82:8080",
+          "job": "kube-state-metrics",
+          "namespace": "monitoring",
+          "phase": "Pending",
+          "pod": "monitoring-grafana-849544f6c9-w87zw",
+          "service": "monitoring-kube-state-metrics",
+          "uid": "83789bd6-55ce-4d65-8688-49c4f71b7ad4"
+        },
+        "value": [1780340286.424, "0"]
+      }
+    ],
+    "kube_pod_container_resource_requests": [
+      {
+        "metric": {
+          "__name__": "kube_pod_container_resource_requests",
+          "container": "prometheus",
+          "endpoint": "http",
+          "instance": "172.16.2.82:8080",
+          "job": "kube-state-metrics",
+          "namespace": "monitoring",
+          "node": "i-07e38792ae9755fe9",
+          "pod": "prometheus-monitoring-kube-prometheus-prometheus-0",
+          "resource": "memory",
+          "service": "monitoring-kube-state-metrics",
+          "uid": "444477f8-a106-410b-a104-b364f53604c9",
+          "unit": "byte"
+        },
+        "value": [1780340286.445, "419430400"]
+      },
+      {
+        "metric": {
+          "__name__": "kube_pod_container_resource_requests",
+          "container": "grafana",
+          "endpoint": "http",
+          "instance": "172.16.2.82:8080",
+          "job": "kube-state-metrics",
+          "namespace": "monitoring",
+          "node": "i-07e38792ae9755fe9",
+          "pod": "monitoring-grafana-849544f6c9-w87zw",
+          "resource": "cpu",
+          "service": "monitoring-kube-state-metrics",
+          "uid": "83789bd6-55ce-4d65-8688-49c4f71b7ad4",
+          "unit": "core"
+        },
+        "value": [1780340286.445, "0.1"]
+      }
+    ]
+  }
+}`
 ### 3.6 Crear el Glue Job
+
+Este Job transforma los JSONs anidados en Raw, en un formato tabular optimizado (Parquet) para consultas analíticas para crearlo sigue los siguientes pasos:
 
 Sube el script del job de Glue que se encuentra en el archivo glue/glue_job.py al bucket de S3 `s3://infrastucture-vbenitezz-dfsanchezv/glue/scripts/`
 
@@ -327,6 +493,7 @@ aws s3 ls s3://infrastucture-vbenitezz-dfsanchezv/curated/prometheus/ --recursiv
 ```
 
 ---
+
 
 ## Parte 4 — Athena + Glue Data Catalog (por consola)
 
