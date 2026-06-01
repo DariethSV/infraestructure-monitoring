@@ -6,9 +6,10 @@ Pipeline de monitoreo de un clúster EKS que combina arquitectura **streaming** 
 
 ## Arquitectura
 
-```
 
-```
+![alt text](intensivos.png)
+
+
 
 ---
 
