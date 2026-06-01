@@ -18,7 +18,6 @@ DEST   = args["dest_path"]
 df_raw = spark.read.option("multiline", "true").json(SOURCE)
 
 # ── Explotar métricas anidadas ────────────────────────────
-# Cada métrica viene como dict: {"metric": {...labels}, "value": [timestamp, valor]}
 metrics_to_process = [
     "node_cpu_seconds_total",
     "node_memory_MemAvailable_bytes",

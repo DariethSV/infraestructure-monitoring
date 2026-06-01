@@ -403,6 +403,16 @@ Lambda automáticamente dispara el Glue Job al finalizar.
 
 **Nota AWS Academy:** EventBridge está bloqueado por la política `voc-cancel-cred` del entorno de laboratorio. Por lo que no fue posible programar su ejecución
 
+## Prueba con NGINX
+
+Métricas antes de subir NGINX:
+![alt text](image.png)
+![alt text](image-1.png)
+
+Después de subir NGINX y enviar peticiones en bucle: kubectl exec -it nginx-deployment-77bc6bd484-s69c7 -n nginx-demo -- /bin/bash -c "while true; do cat /dev/urandom | head -c 1000; done"
+![alt text](image-2.png)
+![alt text](image-3.png)
+
 ## Estructura del repositorio
 
 ```
