@@ -1,0 +1,71 @@
+# monitoring-values.yaml
+
+# ─── PROMETHEUS ───────────────────────────────────────────
+prometheus:
+  prometheusSpec:
+    # Retención de métricas: 15 días en streaming
+    retention: 15d
+    # Recursos conservadores para AWS Academy (limita costos)
+    resources:
+      requests:
+        cpu: 200m
+        memory: 400Mi
+      limits:
+        cpu: 500m
+        memory: 1Gi
+    # Almacenamiento persistente para Prometheus
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ebs-gp3
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 10Gi
+
+# ─── GRAFANA ──────────────────────────────────────────────
+grafana:
+  enabled: true
+  adminPassword: "Admin1234!"   
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  # Persistencia para dashboards
+  persistence:
+    enabled: true
+    storageClassName: ebs-gp3
+    size: 2Gi
+
+# ─── ALERTMANAGER ─────────────────────────────────────────
+alertmanager:
+  enabled: true
+  alertmanagerSpec:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 64Mi
+      limits:
+        cpu: 100m
+        memory: 128Mi
+    storage:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: ebs-gp3
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 2Gi
+
+# ─── NODE EXPORTER ────────────────────────────────────────
+# Recolecta métricas del sistema operativo de cada nodo
+nodeExporter:
+  enabled: true
+
+# ─── KUBE STATE METRICS ───────────────────────────────────
+# Recolecta métricas del estado de objetos Kubernetes (pods, deployments, etc.)
+kubeStateMetrics:
+  enabled: true

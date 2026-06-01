@@ -1,0 +1,5 @@
+{
+    "--source_path": "s3://infrastucture-vbenitezz-dfsanchezv/raw/prometheus/",
+    "--dest_path": "s3://infrastucture-vbenitezz-dfsanchezv/curated/prometheus/",
+    "--job-language": "python"
+}
