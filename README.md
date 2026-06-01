@@ -7,7 +7,8 @@ Pipeline de monitoreo de un clúster EKS que combina arquitectura **streaming** 
 ## Arquitectura
 
 
-![alt text](intensivos.png)
+<img width="3100" height="1740" alt="Intensivos" src="https://github.com/user-attachments/assets/c5fef994-85fc-4559-9358-41bae9ddfa22" />
+
 
 
 
